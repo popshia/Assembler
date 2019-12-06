@@ -269,22 +269,12 @@ private:
 
 	string BYTE() {
 		string returnString;
-		if ( currentLineTokens[0].token != "BYTE" ) {
-			for ( int i = 2; i < currentLineTokens.size(); i++ ) {
-				for ( int k = 0; k < currentLineTokens[i].token.size(); k++ ) {
-					returnString += currentLineTokens[i].token[k];
-				} // collect all char in each string
-			} // run all string after the "BYTE"
-			return returnString; // already in hexadicimal
-		} // label + byte case
-		else {
-			for ( int i = 1; i < currentLineTokens.size(); i++ ) {
-				for ( int k = 0; k < currentLineTokens[i].token.size(); k++ ) {
-					returnString += currentLineTokens[i].token[k];
-				} // collect all char in each string
-			} // run all string after the "BYTE"
-			return returnString; // already in hexadicimal
-		} // only bye case
+		for ( int i = 1; i < currentLineTokens.size(); i++ ) {
+			for ( int k = 0; k < currentLineTokens[i].token.size(); k++ ) {
+				returnString += currentLineTokens[i].token[k];
+			} // collect all char in each string
+		} // run all string after the "BYTE"
+		return returnString; // already in hexadicimal
 	} // byte case
 
 	string AAD() { return "1101010100001010"; }
