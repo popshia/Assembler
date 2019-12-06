@@ -52,6 +52,7 @@ public:
 	vector<TokenData> commentTable;               // 8 ok
 	vector<TokenData> currentLineTokens;
 	vector<string> currentMachineCode;
+	int linePlus = 0;
 	int lineNum = 0; // setw( 4 ) << setfill( '0' ) << hex << uppercase
 
 	void Run() { GetToken(); } // start function
@@ -157,8 +158,10 @@ private:
 					} // end of file
 				} // character case
 			} // read single line
-			SyntaxAnalyze();
+			//SyntaxAnalyze();
 			for ( int i = 0; i < currentLineTokens.size(); i++ ) Output << "(" << currentLineTokens[i].tokenType << "," << currentLineTokens[i].tableNum << ")";
+			lineNum += linePlus;
+			linePlus = 0;
 			Output << endl;
 			currentLineTokens.clear();
 		} // while not EOF
@@ -243,10 +246,6 @@ private:
 		return;
 	} // Identify()
 
-	void SyntaxAnalyze() {
-
-	} // SyntaxAnalyze()
-	
 	void binaryToHexdacimal() {
 		string binary = "1111000010100010"; // F0 A2
 		string returnString = "\0";
@@ -263,6 +262,7 @@ private:
 			bitset<8> output(oneNibble);
 			cout << hex << uppercase << output.to_ulong() << " ";
 			oneNibble = "\0";
+			linePlus++;
 		} // get four nibbles
 		cout << endl;
 	} // convert binary to hexdacimal
